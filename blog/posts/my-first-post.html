@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rethinking Attention Mechanisms - Junsun Choi</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../index.html" class="nav-link active">Blog</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <article class="blog-article">
+      <zero-md>
+        <template data-append>
+          <style>
+            h1 { font-size: 1.8rem; margin-bottom: 8px; color: #222; }
+            h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: #222; }
+            h3 { font-size: 1.15rem; margin-top: 24px; margin-bottom: 8px; color: #333; }
+            p { margin-bottom: 14px; font-size: 1rem; line-height: 1.7; color: #444; }
+            ul, ol { margin-bottom: 14px; padding-left: 24px; }
+            li { margin-bottom: 6px; font-size: 1rem; line-height: 1.7; color: #444; }
+            a { color: #2563eb; text-decoration: none; }
+            a:hover { text-decoration: underline; }
+            blockquote { border-left: 3px solid #ddd; margin: 16px 0; padding: 8px 16px; color: #666; font-style: italic; }
+            code { background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; }
+            pre code { display: block; padding: 16px; overflow-x: auto; }
+            img { max-width: 100%; height: auto; border-radius: 6px; }
+            figure { margin: 24px 0; text-align: center; }
+            figure img { max-width: 100%; }
+            figcaption { margin-top: 8px; font-size: 0.85rem; color: #888; font-style: italic; }
+          </style>
+        </template>
+        <script type="text/markdown">
+# Rethinking Attention Mechanisms for Long-Context Language Models
+
+**May 11, 2026**
+
+<figure>
+  <img src="../../assets/images/paper-thumbnail.png" alt="Sparse attention patterns emerging in long-context transformers">
+  <figcaption>Figure 1: Visualization of sparse attention patterns in our proposed SlidingMix architecture across 128K token sequences.</figcaption>
+</figure>
+
+We are excited to share our latest paper, **"SlidingMix: Efficient Sparse Attention for Long-Context Language Models"**, now available on [arXiv](https://arxiv.org/abs/XXXX.XXXXX).
+
+## The Problem
+
+Transformer-based language models struggle with long contexts. Standard self-attention scales quadratically with sequence length, making it impractical to process documents with more than a few thousand tokens without running into memory and compute bottlenecks. Existing sparse attention methods reduce cost but often miss critical long-range dependencies.
+
+## Our Approach
+
+We propose **SlidingMix**, a hybrid attention mechanism that combines:
+
+- **Local sliding window attention** for capturing nearby token interactions efficiently
+- **Global landmark tokens** that are dynamically selected based on information density, providing long-range shortcuts
+- **A learned mixing gate** that decides, per layer and per head, how much to rely on local vs. global attention
+
+The key insight is that not all layers need the same attention pattern. Early layers benefit from broad context, while later layers tend to focus locally. SlidingMix learns this allocation automatically.
+
+<figure>
+  <img src="../../assets/images/paper-figure1.png" alt="SlidingMix architecture diagram">
+  <figcaption>Figure 2: Architecture of SlidingMix. The mixing gate (right) modulates the balance between sliding window and landmark attention at each layer.</figcaption>
+</figure>
+
+## Results
+
+We evaluated SlidingMix on three long-context benchmarks:
+
+- **SCROLLS**: 4.2 points above the previous state-of-the-art, with 3x less memory usage
+- **LongBench**: Competitive accuracy while processing 128K tokens in under 2 seconds on a single A100
+- **Needle-in-a-Haystack**: Near-perfect retrieval accuracy up to 256K context length
+
+<figure>
+  <img src="../../assets/images/paper-figure2.png" alt="Bar chart comparing SlidingMix to baselines">
+  <figcaption>Figure 3: Performance comparison on SCROLLS. SlidingMix achieves the best accuracy-efficiency tradeoff across all tasks.</figcaption>
+</figure>
+
+## Why It Matters
+
+Long-context understanding is essential for real-world applications like legal document analysis, codebase navigation, and multi-turn dialogue. SlidingMix makes it practical to deploy long-context models without requiring massive hardware — a single GPU is enough for 128K tokens.
+
+## Links
+
+- [arXiv Paper](https://arxiv.org/abs/XXXX.XXXXX)
+- [Code (GitHub)](https://github.com/yourrepo/slidingmix)
+
+---
+
+*If you have questions or comments, feel free to reach out via email.*
+        </script>
+      </zero-md>
+    </article>
+  </div>
+
+</body>
+</html>
