@@ -3,102 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rethinking Attention Mechanisms - Junsun Choi</title>
+  <meta name="description" content="Comparing datacenter interconnects means considering communication patterns, token throughput, and system cost together. This example introduces the questions behind that comparison.">
+  <title>The Attack of Switchless Topology for LLM Serving — Junsun Choi</title>
   <link rel="stylesheet" href="../../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
 </head>
 <body>
-
-  <nav class="navbar">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="navbar" aria-label="Main navigation">
     <div class="nav-container">
       <a href="../../index.html" class="nav-link">Home</a>
-      <a href="../index.html" class="nav-link active">Blog</a>
+      <a href="../../index.html#projects" class="nav-link">Research</a>
+      <a href="../../index.html#publications" class="nav-link">Publications</a>
+      <a href="../index.html" class="nav-link active" aria-current="page">Blog</a>
+      <a href="../../assets/cv.pdf" class="nav-link">CV ↗</a>
     </div>
   </nav>
 
-  <div class="container">
-    <article class="blog-article">
+  <main id="main">
+    <header class="post-title-band">
+      <div class="post-title-inner">
+        <a class="back-link" href="../index.html">← All posts</a>
+        <h1>The Attack of Switchless Topology for LLM Serving</h1>
+        <time class="post-date" datetime="2026-05-11">May 11, 2026</time>
+      </div>
+    </header>
+    <article class="article-body" aria-label="Article">
+      <p class="sample-notice">Example post · This page demonstrates the article layout. The text and schematic are illustrative, not reported research results.</p>
+      <aside class="post-summary" aria-label="Summary"><span class="meta-label">TL;DR</span><p>Comparing datacenter interconnects means considering communication patterns, token throughput, and system cost together. This example introduces the questions behind that comparison.</p></aside>
       <zero-md>
-        <template data-append>
-          <style>
-            h1 { font-size: 1.8rem; margin-bottom: 8px; color: #222; }
-            h2 { font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px; color: #222; }
-            h3 { font-size: 1.15rem; margin-top: 24px; margin-bottom: 8px; color: #333; }
-            p { margin-bottom: 14px; font-size: 1rem; line-height: 1.7; color: #444; }
-            ul, ol { margin-bottom: 14px; padding-left: 24px; }
-            li { margin-bottom: 6px; font-size: 1rem; line-height: 1.7; color: #444; }
-            a { color: #2563eb; text-decoration: none; }
-            a:hover { text-decoration: underline; }
-            blockquote { border-left: 3px solid #ddd; margin: 16px 0; padding: 8px 16px; color: #666; font-style: italic; }
-            code { background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; }
-            pre code { display: block; padding: 16px; overflow-x: auto; }
-            img { max-width: 100%; height: auto; border-radius: 6px; }
-            figure { margin: 24px 0; text-align: center; }
-            figure img { max-width: 100%; }
-            figcaption { margin-top: 8px; font-size: 0.85rem; color: #888; font-style: italic; }
-          </style>
-        </template>
+        <template><link rel="stylesheet" href="../../assets/css/article.css"></template>
         <script type="text/markdown">
-# Rethinking Attention Mechanisms for Long-Context Language Models
 
-**May 11, 2026**
+Communication is part of the computation. When a model is spread across accelerators, the connections between those accelerators can shape both performance and system cost.
 
-<figure>
-  <img src="../../assets/images/paper-thumbnail.png" alt="Sparse attention patterns emerging in long-context transformers">
-  <figcaption>Figure 1: Visualization of sparse attention patterns in our proposed SlidingMix architecture across 128K token sequences.</figcaption>
-</figure>
+This note sketches the questions behind comparing switched and directly connected networks for language model serving.
 
-We are excited to share our latest paper, **"SlidingMix: Efficient Sparse Attention for Long-Context Language Models"**, now available on [arXiv](https://arxiv.org/abs/XXXX.XXXXX).
+## Why topology matters
 
-## The Problem
+Mixture-of-experts models route tokens to selected experts. When those experts live on different devices, routing creates communication between accelerators. The amount and pattern of that traffic depend on how the model and workload are distributed.
 
-Transformer-based language models struggle with long contexts. Standard self-attention scales quadratically with sequence length, making it impractical to process documents with more than a few thousand tokens without running into memory and compute bottlenecks. Existing sparse attention methods reduce cost but often miss critical long-range dependencies.
-
-## Our Approach
-
-We propose **SlidingMix**, a hybrid attention mechanism that combines:
-
-- **Local sliding window attention** for capturing nearby token interactions efficiently
-- **Global landmark tokens** that are dynamically selected based on information density, providing long-range shortcuts
-- **A learned mixing gate** that decides, per layer and per head, how much to rely on local vs. global attention
-
-The key insight is that not all layers need the same attention pattern. Early layers benefit from broad context, while later layers tend to focus locally. SlidingMix learns this allocation automatically.
+A useful comparison therefore starts with the workload, rather than treating peak link bandwidth as the whole story.
 
 <figure>
-  <img src="../../assets/images/paper-figure1.png" alt="SlidingMix architecture diagram">
-  <figcaption>Figure 2: Architecture of SlidingMix. The mixing gate (right) modulates the balance between sliding window and landmark attention at each layer.</figcaption>
+  <img src="../../assets/images/network-topology.svg" alt="Accelerator nodes linked through a central interconnect" width="640" height="440">
+  <figcaption>Figure 1. An illustrative interconnect schematic. Actual topology, placement, and traffic patterns determine which links carry the workload.</figcaption>
 </figure>
 
-## Results
+## What should we compare?
 
-We evaluated SlidingMix on three long-context benchmarks:
+There are two complementary questions:
 
-- **SCROLLS**: 4.2 points above the previous state-of-the-art, with 3x less memory usage
-- **LongBench**: Competitive accuracy while processing 128K tokens in under 2 seconds on a single A100
-- **Needle-in-a-Haystack**: Near-perfect retrieval accuracy up to 256K context length
+- **Throughput:** how many tokens can the system serve under a specified workload and latency constraint?
+- **Cost efficiency:** how much throughput does that system deliver for the resources it requires?
 
-<figure>
-  <img src="../../assets/images/paper-figure2.png" alt="Bar chart comparing SlidingMix to baselines">
-  <figcaption>Figure 3: Performance comparison on SCROLLS. SlidingMix achieves the best accuracy-efficiency tradeoff across all tasks.</figcaption>
-</figure>
+Neither number is meaningful without assumptions about the model, accelerator count, batch size, and communication pattern. A fair comparison should state those assumptions explicitly.
 
-## Why It Matters
+<details>
+  <summary>What belongs in an experimental setup?</summary>
+  <p>Describe the model and expert placement, accelerator hardware, per-link bandwidth, traffic pattern, routing policy, cost model, and latency target. Separate measured quantities from modeled estimates.</p>
+</details>
 
-Long-context understanding is essential for real-world applications like legal document analysis, codebase navigation, and multi-turn dialogue. SlidingMix makes it practical to deploy long-context models without requiring massive hardware — a single GPU is enough for 128K tokens.
+## Looking beyond peak bandwidth
 
-## Links
+Direct connections and switched networks make different tradeoffs in connectivity, link utilization, and hardware cost. Whether a topology is attractive depends on how those tradeoffs interact with the workload.
 
-- [arXiv Paper](https://arxiv.org/abs/XXXX.XXXXX)
-- [Code (GitHub)](https://github.com/yourrepo/slidingmix)
+> The question is how well a network serves a particular workload within a system budget.
+
+## Related research
+
+See the [publications section](/index.html#publication-moe) for **Rethinking Network Topologies for Cost-Effective Mixture-of-Experts LLM Serving**.
 
 ---
 
-*If you have questions or comments, feel free to reach out via email.*
+*This is an example article for the website template. Replace it with your research narrative, figures, and verified results before publishing.*
+
         </script>
       </zero-md>
+      <nav class="article-navigation" aria-label="Article navigation"><a href="../index.html">← Back to all posts</a><a href="mailto:junsun@berkeley.edu">Questions or comments? ↗</a></nav>
     </article>
-  </div>
-
+  </main>
+  <footer class="site-footer">
+    <div>
+      <span>© 2026 Junsun Choi</span>
+      <span>UC Berkeley EECS</span>
+      <span>Last Updated: <time datetime="2026-11-03">Nov 3, 2026</time></span>
+    </div>
+  </footer>
 </body>
 </html>
