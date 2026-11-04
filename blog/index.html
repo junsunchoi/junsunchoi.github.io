@@ -3,33 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - Junsun Choi</title>
+  <meta name="description" content="Research notes on computer architecture, datacenter networks, and hyperscale systems by Junsun Choi.">
+  <title>Blog — Junsun Choi</title>
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-
-  <nav class="navbar">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="navbar" aria-label="Main navigation">
     <div class="nav-container">
+      <a href="../index.html" class="nav-brand">Junsun Choi</a>
       <a href="../index.html" class="nav-link">Home</a>
-      <a href="index.html" class="nav-link active">Blog</a>
+      <a href="../index.html#projects" class="nav-link">Research</a>
+      <a href="../index.html#publications" class="nav-link">Publications</a>
+      <a href="index.html" class="nav-link active" aria-current="page">Blog</a>
+      <a href="../assets/cv.pdf" class="nav-link">CV ↗</a>
     </div>
   </nav>
 
-  <div class="container">
+  <main class="container blog-page" id="main">
     <h1 class="page-title">Blog</h1>
-
-    <div class="blog-list">
-
-      <!-- Add new posts here at the top (newest first) -->
-      <a href="posts/my-first-post.html" class="blog-entry">
-        <span class="blog-entry-date">May 11, 2026</span>
-        <span class="blog-entry-title">Rethinking Attention Mechanisms for Long-Context Language Models</span>
-        <span class="blog-entry-excerpt">We propose SlidingMix, a hybrid sparse attention mechanism that enables efficient processing of 128K+ token sequences on a single GPU...</span>
-      </a>
-
+    <p class="page-description">Thoughts and notes on research.</p>
+    <div class="blog-list" id="blog-list"></div>
+    <noscript><p><a href="coming-soon.html">The Attack of Switchless Topology for LLM Serving</a></p></noscript>
+  </main>
+  <footer class="site-footer">
+    <div>
+      <span>© 2026 Junsun Choi</span>
+      <span>UC Berkeley EECS</span>
+      <span>Last Updated: <time datetime="2026-11-03">Nov 3, 2026</time></span>
     </div>
-  </div>
-
+  </footer>
+  <script src="../assets/js/posts.js"></script>
+  <script src="../assets/js/blog.js"></script>
 </body>
 </html>
