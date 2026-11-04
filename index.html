@@ -13,6 +13,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <nav class="navbar" aria-label="Main navigation">
     <div class="nav-container">
+      <a href="index.html" class="nav-brand">Junsun Choi</a>
       <a href="index.html" class="nav-link active" aria-current="page">Home</a>
       <a href="#projects" class="nav-link">Research</a>
       <a href="#publications" class="nav-link">Publications</a>
@@ -65,18 +66,17 @@
           Prior to Berkeley, I received my B.S. in Electrical and Computer Engineering from Seoul National University.
         </p>
 
-        <!-- Featured Blog Post (populated from assets/js/posts.js) -->
+        <!-- Research highlight (populated from assets/js/posts.js) -->
         <section class="featured-post">
-          <h2>Latest Post</h2>
+          <h2>Featured Post</h2>
           <a href="#" class="featured-card" id="featured-card">
             <span class="featured-media" hidden>
-              <img class="featured-image" width="320" height="220" alt="">
+              <img class="featured-image" width="520" height="232" alt="">
             </span>
             <span class="featured-content">
               <span class="featured-date"></span>
               <span class="featured-title"></span>
               <span class="featured-excerpt"></span>
-              <span class="featured-read-more">Read more &rarr;</span>
             </span>
           </a>
         </section>
@@ -85,9 +85,11 @@
 
     <section class="projects" id="projects" aria-labelledby="projects-title">
       <h2 id="projects-title">Research Projects</h2>
-      <p class="section-intro">My work explores how hardware and networks shape the design of hyperscale systems.</p>
       <section class="research-group" aria-labelledby="active-project-title">
         <h3 class="research-group-title" id="active-project-title">(Active) Network-SoC Co-Design Framework for AI Factories</h3>
+        <!-- Replace this placeholder with a short overview of the Network-SoC co-design framework. -->
+        <p class="research-group-description">
+        </p>
         <div class="project-list">
           <article class="project-card">
             <div class="project-thumbnail"><img src="assets/images/framework.svg" alt="Accelerator nodes connected through a central interconnect" width="320" height="220"></div>
@@ -100,6 +102,17 @@
       </section>
       <section class="research-group" aria-labelledby="ai-factories-title">
         <h3 class="research-group-title" id="ai-factories-title">Network Design for AI Inference Clusters</h3>
+        <!-- Replace this placeholder with a short overview of network design for AI inference clusters. -->
+        <p class="research-group-description">After the wide adoption of AI, the focus of
+          hyperscale systems shifted from CPU-based, microservice-oriented systems to
+          XPU-based, AI-focusing systems.
+          As AI model size grows faster than the per-device memory
+          capacity, communication has become more significant in the end-to-end runtime of AI models.
+          As a result, the scope of hardware system design extends beyond a single SoC
+          to include the network. 
+          I explored how we should design the network topology and apply new technologies
+          for AI serving clusters.
+        </p>
         <div class="project-list">
           <article class="project-card">
             <div class="project-thumbnail"><img src="assets/images/inference-topology.svg" alt="Accelerator nodes connected through a central interconnect" width="320" height="220"></div>
@@ -113,8 +126,13 @@
           <article class="project-card">
             <div class="project-thumbnail"><img src="assets/images/ocs.png" alt="Optical circuit switching topologies with fast reconfigurable links and wide links using link fan-out" width="1200" height="804" loading="lazy"></div>
             <div class="project-info">
-              <h4>Performance Thresholds of OCS for MoE LLM Inference</h4>
-              <p>Optical circuit switching offers a different way to connect datacenter resources. This work studies the performance thresholds that matter when applying it to LLM inference.</p>
+              <h4>Using Optical Circuit Switching for MoE LLM Inference</h4>
+              <p>Optical circuit switches (OCSes) have recently emerged as promising alternatives to
+                the traditional electrical packet swtiches (EPSes), offering
+                lower operational costs, minimal multi-hop switching penalties, and easier radix and bandwidth scaling.
+                Can OCS fully replace EPS for AI inference?
+                This work suggests that in order to do so, OCS should have a sub-microsecond reconfiguration latency, or a higher concurrent connectivity supported by higher physical link fan-out.
+              </p>
               <a class="text-link" href="https://ieeexplore.ieee.org/abstract/document/11524850">OFC · 2026 <span aria-hidden="true">↗</span></a>
             </div>
           </article>
@@ -122,13 +140,29 @@
       </section>
       <section class="research-group" aria-labelledby="hyperscale-title">
         <h3 class="research-group-title" id="hyperscale-title">Hyperscale SoC Project: Hardware-Software Co-Design for Data Center Systems</h3>
-        <p class="research-group-note">In Collaboration with Google</p>
+        <p class="research-group-note">In Collaboration with Google Cloud</p>
+        <!-- Replace this placeholder with a short overview of the Hyperscale SoC project. -->
+        <p class="research-group-description">The slowdown of Moore's Law and
+          the demise of Dennard Scaling necessitate hardware customization (hardware-software co-design) for performance scaling.
+          This is not an exception for data center systems.
+          This project aims to address the <em>datacenter tax</em> problem,
+          which is the system-level overhead introduced by six common functions in warehouse-scale computers
+          that adds up to 22-27% of fleet-wide compute cycles,
+          by combining fleet-wide profiling of Google Cloud
+          with agile development of tailored open-source hardware accelerators.
+          The removal of these overheads can be translated to $Ms of TCO savings for a major cloud provider.
+          I tackled lossless (de)compression and remote procedure call (RPC),
+          which are two of the most critical datacenter tax functions.</p>
         <div class="project-list">
           <article class="project-card">
             <div class="project-thumbnail"><img src="assets/images/rpc-model.png" alt="RPC payload scheduling across CPUs and accelerators with two steal points" width="877" height="366" loading="lazy"></div>
             <div class="project-info">
-              <h4>RPC Accelerator Scheduling</h4>
-              <p>This project studies remote procedure call accelerator scheduling for hyperscale workloads.</p>
+              <h4>RPC Scheduling</h4>
+              <p>Remote procedure call (RPC) includes a chain of other datacenter tax functions ((de)serialization, (de)compression, (de)encryption)
+                so that it can be accelerated by hardware accelerators for each function, or run on less-scarce CPUs.
+                The question is how to optimally schedule RPC payloads in such a heterogeneous system.
+                This work explores and implements novel work-stealing scheduling policies that move payloads from a CPU to an accelerator, improving the tail latency of big-data processing payloads by over 5x.
+              </p>
               <a class="text-link" href="#paper-rpc">Related publication <span aria-hidden="true">↗</span></a>
             </div>
           </article>
@@ -136,7 +170,13 @@
             <div class="project-thumbnail"><img src="assets/images/decompressor.svg" alt="Data flowing through a compression and decompression processing unit" width="320" height="220" loading="lazy"></div>
             <div class="project-info">
               <h4>Hardware Accelerator for Lossless (De)Compression</h4>
-              <p>System-level operations such as compression and decompression are a key part of datacenter workloads. My work on CDPU explores co-designed processing units for these operations.</p>
+              <p>I contributed to
+                <a href="https://github.com/ucb-bar/compress-acc">
+                an open-source hardware accelerator for lossless (de)compression</a> (CDPU)
+                where I desigined the decompressor. After an extensive design-space exploration,
+                our final hyperscale-optimized RISC-V SoC with CDPU achieves 10-16x speedup over Xeon CPUs
+                while only consuming 2-5% of the area of a CPU.
+              </p>
               <a class="text-link" href="#paper-cdpu">ISCA · 2023 <span aria-hidden="true">↗</span></a>
               · <a class="text-link" href="#paper-ms-thesis">Master’s thesis <span aria-hidden="true">↗</span></a>
             </div>
@@ -156,22 +196,22 @@
       </p>
       <p>
         <strong id="paper-topology">Rethinking Network Topologies for Cost-Effective Mixture-of-Experts LLM Serving</strong> <a class="publication-link" href="https://arxiv.org/abs/2605.00254">(link)</a><br>
-        Junsun Choi, Sam Son, Sunjin Choi, Hansung Kim, Yakun Sophia Shao, Scott Shenker, Sylvia Ratnasamy, and Borivoje Nikolić<br>
+        <u>Junsun Choi</u>, Sam Son, Sunjin Choi, Hansung Kim, Yakun Sophia Shao, Scott Shenker, Sylvia Ratnasamy, and Borivoje Nikolić<br>
         <em>arXiv Preprint, 2026</em>
       </p>
       <p>
         <strong id="paper-ocs">Performance Thresholds for Optical Circuit Switching in LLM Inference</strong> <a class="publication-link" href="https://ieeexplore.ieee.org/abstract/document/11524850">(link)</a><br>
-        Junsun Choi, Sunjin Choi, Sam Son, Vladimir Stojanovic, Yakun Sophia Shao, and Borivoje Nikolić<br>
+        <u>Junsun Choi</u>, Sunjin Choi, Sam Son, Vladimir Stojanovic, Yakun Sophia Shao, and Borivoje Nikolić<br>
         <em>In Proceedings of the 2026 Optical Fiber Communications Conference and Exhibition (OFC 2026)</em>
       </p>
       <p>
         <strong id="paper-ms-thesis">A Hardware Accelerator Generator for Zstandard Decompression</strong> <a class="publication-link" href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2024/EECS-2024-236.html">(link)</a><br>
-        Junsun Choi<br>
+        <u>Junsun Choi</u><br>
         <em>Master's Thesis, 2024</em>
       </p>
       <p>
         <strong id="paper-cdpu">CDPU: Co-designing Compression and Decompression Processing Units for Hyperscale Systems</strong> <a class="publication-link" href="https://dl.acm.org/doi/abs/10.1145/3579371.3589074">(link)</a><br>
-        Sagar Karandikar, Aniruddha N. Udipi, Junsun Choi, Joonho Whangbo, Jerry Zhao, Svilen Kanev, Edwin Lim, Jyrki Alakuijala, Vrishab Madduri, Yakun Sophia Shao, Borivoje Nikolic, Krste Asanovic, Parthasarathy Ranganathan <br>
+        Sagar Karandikar, Aniruddha N. Udipi, <u>Junsun Choi</u>, Joonho Whangbo, Jerry Zhao, Svilen Kanev, Edwin Lim, Jyrki Alakuijala, Vrishab Madduri, Yakun Sophia Shao, Borivoje Nikolic, Krste Asanovic, Parthasarathy Ranganathan <br>
         <em>In Proceedings of the 50th ACM/IEEE International Symposium on Computer Architecture (ISCA 2023)</em>
       </p>
     </section>
@@ -190,7 +230,7 @@
       const post = (window.POSTS || [])[0];
       const card = document.getElementById('featured-card');
       if (!post || !card) return;
-      card.href = `blog/posts/${post.slug}.html`;
+      card.href = post.comingSoon ? "blog/coming-soon.html" : `blog/posts/${post.slug}.html`;
       const image = card.querySelector('.featured-image');
       if (post.image) {
         image.src = post.image;

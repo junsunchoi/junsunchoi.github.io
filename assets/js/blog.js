@@ -10,7 +10,7 @@
   }
   for (const post of posts) {
     const entry = document.createElement('a');
-    entry.href = `posts/${post.slug}.html`;
+    entry.href = post.comingSoon ? "coming-soon.html" : `posts/${post.slug}.html`;
     entry.className = 'blog-entry';
     if (post.image) {
       const image = document.createElement('img');

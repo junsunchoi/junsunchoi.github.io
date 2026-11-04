@@ -5,10 +5,11 @@
 window.POSTS = [
   {
     slug: "my-first-post",
+    comingSoon: true,
     date: "May 11, 2026",
-    image: "assets/images/network-topology.svg",
-    imageAlt: "An illustrative network connecting accelerator nodes",
-    title: "The Attack of Switchless Topology for LLM Serving",
-    excerpt: "An example research note on communication patterns, token throughput, and the cost of datacenter interconnects."
+    image: "assets/images/topology-marketing.svg",
+    imageAlt: "Comparison of throughput under SLO and system cost for fat-tree and torus networks",
+    title: "A Case for Switchless Topology for LLM Serving",
+    excerpt: "Is the huge investment in expensive network equipment worth it for LLM serving? Can a lower-cost but less-performant network topology achieve higher cost-effectiveness?"
   }
 ];
