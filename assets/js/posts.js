@@ -10,6 +10,6 @@ window.POSTS = [
     image: "assets/images/topology-marketing.svg",
     imageAlt: "Comparison of throughput under SLO and system cost for fat-tree and torus networks",
     title: "A Case for Switchless Topology for LLM Serving",
-    excerpt: "Is the huge investment in expensive network equipment worth it for LLM serving? Can a lower-cost but less-performant network topology achieve higher cost-effectiveness?"
+    excerpt: "Is the huge investment in expensive networking equipment worth it for LLM serving? Can a lower-cost but lower-performance network topology achieve higher cost-effectiveness?"
   }
 ];

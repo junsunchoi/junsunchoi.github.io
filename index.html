@@ -54,16 +54,16 @@
       <div class="content">
         <h2>About Me</h2>
         <p>
-          I am a Ph.D. candidate at UC Berkeley's EECS department.
-          I am a part of the Berkeley Architecture Research group in the SLICE lab, co-advised by Professor <a href="https://comic.eecs.berkeley.edu/index.html">Borivoje Nikolić</a> and Professor <a href="https://people.eecs.berkeley.edu/~ysshao/">Yakun Sophia Shao</a>.
+          I am a Ph.D. candidate in UC Berkeley's EECS department.
+          I am a member of the Berkeley Architecture Research group in the <a href="https://slice.eecs.berkeley.edu">SLICE lab</a>, co-advised by Professor <a href="https://comic.eecs.berkeley.edu/index.html">Borivoje Nikolić</a> and Professor <a href="https://people.eecs.berkeley.edu/~ysshao/">Yakun Sophia Shao</a>.
           I also worked closely with Professor <a href="https://sagark.org">Sagar Karandikar</a> on the hyperscale SoC project.
         </p>
         <p>
-          My goal as an engineer is to design the next-generation hyperscale systems that can impact people's lives.
-          My research focuses on data center system design, in the intersection of SoC microarchitecture and network.
+          My goal as an engineer is to design next-generation hyperscale systems that can impact people's lives.
+          My research focuses on data center system design at the intersection of SoC microarchitecture and networking.
         </p>
         <p>
-          Prior to Berkeley, I received my B.S. in Electrical and Computer Engineering from Seoul National University.
+          Before joining Berkeley, I received my B.S. in Electrical and Computer Engineering from Seoul National University.
         </p>
 
         <!-- Research highlight (populated from assets/js/posts.js) -->
@@ -85,6 +85,7 @@
 
     <section class="projects" id="projects" aria-labelledby="projects-title">
       <h2 id="projects-title">Research Projects</h2>
+      <p class="research-group-note">Listed from newest to oldest.</p>
       <section class="research-group" aria-labelledby="active-project-title">
         <h3 class="research-group-title" id="active-project-title">(Active) Network-SoC Co-Design Framework for AI Factories</h3>
         <!-- Replace this placeholder with a short overview of the Network-SoC co-design framework. -->
@@ -94,44 +95,61 @@
           <article class="project-card">
             <div class="project-thumbnail"><img src="assets/images/framework.svg" alt="Accelerator nodes connected through a central interconnect" width="320" height="220"></div>
             <div class="project-info">
-              <p>Developing a multi-fidelity, area-aware, energy-aware hardware performance evaluation framework
-                for a network-hardware co-design of AI data centers.
+              <p>Building next-generation AI factories requires
+                comprehensive design-space exploration across software, networking, and hardware layers.
+                I am developing a multi-fidelity, area- and energy-aware
+                hardware performance evaluation framework
+                for network-hardware co-design of AI factories.
+              </p>
             </div>
           </article>
         </div>
       </section>
       <section class="research-group" aria-labelledby="ai-factories-title">
-        <h3 class="research-group-title" id="ai-factories-title">Network Design for AI Inference Clusters</h3>
+        <h3 class="research-group-title" id="ai-factories-title">Network Design for AI Serving Clusters</h3>
         <!-- Replace this placeholder with a short overview of network design for AI inference clusters. -->
-        <p class="research-group-description">After the wide adoption of AI, the focus of
-          hyperscale systems shifted from CPU-based, microservice-oriented systems to
-          XPU-based, AI-focusing systems.
-          As AI model size grows faster than the per-device memory
-          capacity, communication has become more significant in the end-to-end runtime of AI models.
+        <p class="research-group-description">With the widespread adoption of AI, the focus of
+          hyperscale systems has shifted from CPU-based, microservice-oriented systems to
+          XPU-based, AI-focused systems.
+          As AI model sizes grow faster than per-device memory
+          capacity, communication accounts for an increasingly significant share of end-to-end runtime.
           As a result, the scope of hardware system design extends beyond a single SoC
-          to include the network. 
-          I explored how we should design the network topology and apply new technologies
-          for AI serving clusters.
+          to include the network.
+          I have explored how to design network topologies and apply new technologies
+          to AI serving clusters.
         </p>
         <div class="project-list">
           <article class="project-card">
             <div class="project-thumbnail"><img src="assets/images/inference-topology.svg" alt="Accelerator nodes connected through a central interconnect" width="320" height="220"></div>
             <div class="project-info">
-              <h4>Cost-Effective Network Topology for MoE LLM Inference</h4>
-              <p>How should we connect accelerators to serve mixture-of-experts language models? This project examines network topologies through both token throughput and throughput per cost.</p>
-              <p>My research looks at the interaction between communication, hardware resources, and datacenter system design.</p>
+              <h4>Cost-Effective Network Topologies for MoE LLM Serving</h4>
+              <p>
+                As communication overhead becomes more significant,
+                much of the industry has responded by building ever-larger
+                non-blocking fat-tree GPU networks, inflating cluster
+                costs with numerous expensive high-capacity switches.
+                Is the increasing network investment necessary for MoE LLM serving (inference)?
+              </p>
+              <p>
+                This work compares the cost-effectiveness (token throughput
+                per unit of cluster cost) of representative network topologies. With software optimizations,
+                lower-cost switchless topologies are more cost-effective across all
+                serving scenarios studied, including variations in context length and service-level objectives.
+              </p>
               <a class="text-link" href="https://arxiv.org/abs/2605.00254">arXiv · 2026 <span aria-hidden="true">↗</span></a>
             </div>
           </article>
           <article class="project-card">
             <div class="project-thumbnail"><img src="assets/images/ocs.png" alt="Optical circuit switching topologies with fast reconfigurable links and wide links using link fan-out" width="1200" height="804" loading="lazy"></div>
             <div class="project-info">
-              <h4>Using Optical Circuit Switching for MoE LLM Inference</h4>
+              <h4>Applying Optical Circuit Switching to MoE LLM Inference</h4>
               <p>Optical circuit switches (OCSes) have recently emerged as promising alternatives to
-                the traditional electrical packet swtiches (EPSes), offering
+                traditional electrical packet switches (EPSes), offering
                 lower operational costs, minimal multi-hop switching penalties, and easier radix and bandwidth scaling.
-                Can OCS fully replace EPS for AI inference?
-                This work suggests that in order to do so, OCS should have a sub-microsecond reconfiguration latency, or a higher concurrent connectivity supported by higher physical link fan-out.
+              </p>
+              <p>
+                Can OCSes fully replace EPSes for AI inference?
+                This work suggests that doing so requires sub-microsecond reconfiguration latency or high physical link fan-out.
               </p>
               <a class="text-link" href="https://ieeexplore.ieee.org/abstract/document/11524850">OFC · 2026 <span aria-hidden="true">↗</span></a>
             </div>
@@ -142,26 +160,26 @@
         <h3 class="research-group-title" id="hyperscale-title">Hyperscale SoC Project: Hardware-Software Co-Design for Data Center Systems</h3>
         <p class="research-group-note">In Collaboration with Google Cloud</p>
         <!-- Replace this placeholder with a short overview of the Hyperscale SoC project. -->
-        <p class="research-group-description">The slowdown of Moore's Law and
-          the demise of Dennard Scaling necessitate hardware customization (hardware-software co-design) for performance scaling.
-          This is not an exception for data center systems.
-          This project aims to address the <em>datacenter tax</em> problem,
-          which is the system-level overhead introduced by six common functions in warehouse-scale computers
-          that adds up to 22-27% of fleet-wide compute cycles,
-          by combining fleet-wide profiling of Google Cloud
+        <p class="research-group-description">The slowdown of Moore's law and
+          the demise of Dennard scaling necessitate hardware customization to sustain performance improvements.
+          Data center systems are no exception.
+          This project addresses the <em>datacenter tax</em>: the system-level overhead
+          introduced by six common functions in warehouse-scale computers, which together
+          account for 22–27% of fleet-wide compute cycles. It combines fleet-wide profiling at Google Cloud
           with agile development of tailored open-source hardware accelerators.
-          The removal of these overheads can be translated to $Ms of TCO savings for a major cloud provider.
-          I tackled lossless (de)compression and remote procedure call (RPC),
-          which are two of the most critical datacenter tax functions.</p>
+          Eliminating these overheads can translate into millions of dollars in total cost of ownership (TCO) savings for a major cloud provider.
+          I have tackled lossless (de)compression and remote procedure calls (RPCs),
+          two of the most critical datacenter tax functions.</p>
         <div class="project-list">
           <article class="project-card">
             <div class="project-thumbnail"><img src="assets/images/rpc-model.png" alt="RPC payload scheduling across CPUs and accelerators with two steal points" width="877" height="366" loading="lazy"></div>
             <div class="project-info">
               <h4>RPC Scheduling</h4>
-              <p>Remote procedure call (RPC) includes a chain of other datacenter tax functions ((de)serialization, (de)compression, (de)encryption)
-                so that it can be accelerated by hardware accelerators for each function, or run on less-scarce CPUs.
+              <p>Remote procedure call (RPC) processing involves a chain of other datacenter tax functions
+                ((de)serialization, (de)compression, and (de)encryption),
+                which can run on dedicated hardware accelerators or on less scarce CPUs.
                 The question is how to optimally schedule RPC payloads in such a heterogeneous system.
-                This work explores and implements novel work-stealing scheduling policies that move payloads from a CPU to an accelerator, improving the tail latency of big-data processing payloads by over 5x.
+                This work explores and implements novel work-stealing scheduling policies that move payloads from a CPU to an accelerator, reducing the tail latency for big-data processing payloads by over 5x.
               </p>
               <a class="text-link" href="#paper-rpc">Related publication <span aria-hidden="true">↗</span></a>
             </div>
@@ -173,9 +191,9 @@
               <p>I contributed to
                 <a href="https://github.com/ucb-bar/compress-acc">
                 an open-source hardware accelerator for lossless (de)compression</a> (CDPU)
-                where I desigined the decompressor. After an extensive design-space exploration,
-                our final hyperscale-optimized RISC-V SoC with CDPU achieves 10-16x speedup over Xeon CPUs
-                while only consuming 2-5% of the area of a CPU.
+                for which I designed the decompressor. Following extensive design-space exploration,
+                our hyperscale-optimized RISC-V SoC with CDPU achieves a 10–16× speedup over Xeon CPUs
+                while using only 2–5% of the area of a CPU.
               </p>
               <a class="text-link" href="#paper-cdpu">ISCA · 2023 <span aria-hidden="true">↗</span></a>
               · <a class="text-link" href="#paper-ms-thesis">Master’s thesis <span aria-hidden="true">↗</span></a>
@@ -192,7 +210,7 @@
         <strong id="paper-rpc">Remote Procedure Call Accelerator Scheduling for
           Hyperscale Workloads</strong> <br>
 
-        <em>arXiv Preprint, 2026 (To Appear)</em>
+        <em>arXiv Preprint, 2026 (forthcoming)</em>
       </p>
       <p>
         <strong id="paper-topology">Rethinking Network Topologies for Cost-Effective Mixture-of-Experts LLM Serving</strong> <a class="publication-link" href="https://arxiv.org/abs/2605.00254">(link)</a><br>
